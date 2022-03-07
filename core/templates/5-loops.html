@@ -1,0 +1,88 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %} Циклы For и While {% endblock %}
+
+{% block content %}
+<p>В этой статье я расскажу о <b>циклах for и while</b>, операторах <b>break</b> и <b>continue</b>, а также о слове
+  <b>else</b>, которое, будучи употребленное с циклом, может сделать программный код несколько более понятным.
+</p>
+<div class="section" id="while">
+  <h2>Цикл while</h2>
+  <p>While - один из самых универсальных циклов в Python, поэтому довольно медленный. Выполняет тело цикла до тех пор,
+    пока условие цикла истинно.</p>
+  <div class="highlight-python3" style="position: relative;">
+    <div class="highlight"><span class="copybutton" title="Убрать приглашения и вывод программы">&gt;&gt;&gt;</span>
+      <pre class="code pycon literal-block"><span class="gp">&gt;&gt;&gt; </span><span class="n">i</span> <span class="o">=</span> <span class="mi">5</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">while</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="mi">15</span><span class="p">:</span>
+<span class="gp">... </span>    <span class="nb">print</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+<span class="gp">... </span>    <span class="n">i</span> <span class="o">=</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">2</span>
+<span class="gp">...</span>
+<span class="go">5
+7
+9
+11
+13</span></pre>
+    </div>
+  </div>
+</div>
+<div class="section" id="for">
+  <h2>Цикл for</h2>
+  <p>Цикл for уже чуточку сложнее, чуть менее универсальный, но выполняется гораздо быстрее цикла while. Этот цикл
+    проходится по любому итерируемому объекту (например строке или списку), и во время каждого прохода выполняет тело
+    цикла.</p>
+  <div class="highlight-python3" style="position: relative;">
+    <div class="highlight"><span class="copybutton" title="Убрать приглашения и вывод программы">&gt;&gt;&gt;</span>
+      <pre class="code pycon literal-block"><span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="s1">'hello world'</span><span class="p">:</span>
+<span class="gp">... </span>    <span class="nb">print</span><span class="p">(</span><span class="n">i</span> <span class="o">*</span> <span class="mi">2</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s1">''</span><span class="p">)</span>
+<span class="gp">...</span>
+<span class="go">hheelllloo  wwoorrlldd</span></pre>
+    </div>
+  </div>
+</div>
+<div class="section" id="continue">
+  <h2>Оператор continue</h2>
+  <p>Оператор continue начинает следующий проход цикла, минуя оставшееся тело цикла (for или while)</p>
+  <div class="highlight-python3" style="position: relative;">
+    <div class="highlight"><span class="copybutton" title="Убрать приглашения и вывод программы">&gt;&gt;&gt;</span>
+      <pre class="code pycon literal-block"><span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="s1">'hello world'</span><span class="p">:</span>
+<span class="gp">... </span>    <span class="k">if</span> <span class="n">i</span> <span class="o">==</span> <span class="s1">'o'</span><span class="p">:</span>
+<span class="gp">... </span>        <span class="k">continue</span>
+<span class="gp">... </span>    <span class="nb">print</span><span class="p">(</span><span class="n">i</span> <span class="o">*</span> <span class="mi">2</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s1">''</span><span class="p">)</span>
+<span class="gp">...</span>
+<span class="go">hheellll  wwrrlldd</span></pre>
+    </div>
+  </div>
+</div>
+<div class="section" id="break">
+  <h2>Оператор break</h2>
+  <p>Оператор break досрочно прерывает цикл.</p>
+  <div class="highlight-python3" style="position: relative;">
+    <div class="highlight"><span class="copybutton" title="Убрать приглашения и вывод программы">&gt;&gt;&gt;</span>
+      <pre class="code pycon literal-block"><span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="s1">'hello world'</span><span class="p">:</span>
+<span class="gp">... </span>    <span class="k">if</span> <span class="n">i</span> <span class="o">==</span> <span class="s1">'o'</span><span class="p">:</span>
+<span class="gp">... </span>        <span class="k">break</span>
+<span class="gp">... </span>    <span class="nb">print</span><span class="p">(</span><span class="n">i</span> <span class="o">*</span> <span class="mi">2</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s1">''</span><span class="p">)</span>
+<span class="gp">...</span>
+<span class="go">hheellll</span></pre>
+    </div>
+  </div>
+</div>
+<div class="section" id="else">
+  <h2>Волшебное слово else</h2>
+  <p>Слово else, примененное в цикле for или while, проверяет, был ли произведен выход из цикла инструкцией break, или
+    же "естественным" образом. Блок инструкций внутри else выполнится только в том случае, если выход из цикла
+    произошел без помощи break.</p>
+  <div class="highlight-python3" style="position: relative;">
+    <div class="highlight"><span class="copybutton" title="Убрать приглашения и вывод программы">&gt;&gt;&gt;</span>
+      <pre class="code pycon literal-block"><span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="s1">'hello world'</span><span class="p">:</span>
+<span class="gp">... </span>    <span class="k">if</span> <span class="n">i</span> <span class="o">==</span> <span class="s1">'a'</span><span class="p">:</span>
+<span class="gp">... </span>        <span class="k">break</span>
+<span class="gp">... </span><span class="k">else</span><span class="p">:</span>
+<span class="gp">... </span>    <span class="nb">print</span><span class="p">(</span><span class="s1">'Буквы a в строке нет'</span><span class="p">)</span>
+<span class="gp">...</span>
+<span class="go">Буквы a в строке нет</span></pre>
+    </div>
+  </div>
+</div>
+{% endblock %}

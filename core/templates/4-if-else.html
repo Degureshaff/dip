@@ -1,0 +1,77 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %} Условная инструкция if-elif-else {% endblock %}
+
+{% block content %}
+<p><b>Условная инструкция if-elif-else</b> (её ещё иногда называют оператором ветвления) - основной инструмент
+    выбора в Python. Проще говоря, она выбирает, какое действие следует выполнить, в зависимости от значения
+    переменных в момент проверки условия.</p>
+<div class="section" id="if">
+    <h2>Синтаксис инструкции if</h2>
+    <p>Сначала записывается часть if с условным выражением, далее могут следовать одна или более необязательных
+        частей elif, и, наконец, необязательная часть else. Общая форма записи условной инструкции if выглядит
+        следующим образом:</p>
+    <pre class="code python3"><span class="k">if</span> <span class="n">test1</span><span class="p">:</span>
+    <span class="n">state1</span>
+<span class="k">elif</span> <span class="n">test2</span><span class="p">:</span>
+    <span class="n">state2</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="n">state3</span></pre>
+    <p>Простой пример (напечатает 'true', так как 1 - истина):</p>
+    <pre class="code python3"><span class="o">&gt;&gt;&gt;</span> <span class="k">if</span> <span class="mi">1</span><span class="p">:</span>
+<span class="o">...</span>     <span class="nb">print</span><span class="p">(</span><span class="s1">'true'</span><span class="p">)</span>
+<span class="o">...</span> <span class="k">else</span><span class="p">:</span>
+<span class="o">...</span>     <span class="nb">print</span><span class="p">(</span><span class="s1">'false'</span><span class="p">)</span>
+<span class="o">...</span>
+<span class="n">true</span></pre>
+    <p>Чуть более сложный пример (его результат будет зависеть от того, что ввёл пользователь):</p>
+    <pre class="code python3"><span class="n">a</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="nb">input</span><span class="p">())</span>
+<span class="k">if</span> <span class="n">a</span> <span class="o">&lt;</span> <span class="o">-</span><span class="mi">5</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">'Low'</span><span class="p">)</span>
+<span class="k">elif</span> <span class="o">-</span><span class="mi">5</span> <span class="o">&lt;=</span> <span class="n">a</span> <span class="o">&lt;=</span> <span class="mi">5</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">'Mid'</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">'High'</span><span class="p">)</span></pre>
+    <p>Конструкция с несколькими elif может также служить отличной заменой конструкции switch - case в других языках
+        программирования.</p>
+</div>
+<div class="section" id="python">
+    <h2>Проверка истинности в Python</h2>
+    <ul>
+        <li>Любое число, не равное 0, или непустой объект - истина.</li>
+        <li>Числа, равные 0, пустые объекты и значение None - ложь</li>
+        <li>Операции сравнения применяются к структурам данных рекурсивно</li>
+        <li>Операции сравнения возвращают True или False</li>
+        <li>Логические операторы and и or возвращают истинный или ложный объект-операнд</li>
+    </ul>
+    <p>Логические операторы:</p>
+    <pre class="code python3"><span class="n">X</span> <span class="ow">and</span> <span class="n">Y</span></pre>
+    <p>Истина, если оба значения X и Y истинны.</p>
+    <pre class="code python3"><span class="n">X</span> <span class="ow">or</span> <span class="n">Y</span></pre>
+    <p>Истина, если хотя бы одно из значений X или Y истинно.</p>
+    <pre class="code python3"><span class="ow">not</span> <span class="n">X</span></pre>
+    <p>Истина, если X ложно.</p>
+</div>
+<div class="section" id="if-else">
+    <h2>Трехместное выражение if/else</h2>
+    <p>Следующая инструкция:</p>
+    <pre class="code python3"><span class="k">if</span> <span class="n">X</span><span class="p">:</span>
+    <span class="n">A</span> <span class="o">=</span> <span class="n">Y</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="n">A</span> <span class="o">=</span> <span class="n">Z</span></pre>
+    <p>довольно короткая, но, тем не менее, занимает целых 4 строки. Специально для таких случаев и было придумано
+        выражение if/else:</p>
+    <pre
+        class="code python3"><span class="n">A</span> <span class="o">=</span> <span class="n">Y</span> <span class="k">if</span> <span class="n">X</span> <span class="k">else</span> <span class="n">Z</span></pre>
+    <p>В данной инструкции интерпретатор выполнит выражение Y, если X истинно, в противном случае выполнится
+        выражение Z.</p>
+    <div class="highlight-python3" style="position: relative;">
+        <div class="highlight"><span class="copybutton" title="Убрать приглашения и вывод программы">&gt;&gt;&gt;</span>
+            <pre class="code pycon literal-block"><span class="gp">&gt;&gt;&gt; </span><span class="n">A</span> <span class="o">=</span> <span class="s1">'t'</span> <span class="k">if</span> <span class="s1">'spam'</span> <span class="k">else</span> <span class="s1">'f'</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">A</span>
+<span class="go">'t'</span></pre>
+        </div>
+    </div>
+</div>
+{% endblock %}

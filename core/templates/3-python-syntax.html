@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %} Синтаксис языка Python {% endblock %}
+
+{% block content %}
+<p>Синтаксис языка Python, как и сам язык, очень прост.</p>
+<div class="section" id="section-1">
+  <h2>Синтаксис</h2>
+  <ul>
+    <li>
+      <p>Конец строки является концом инструкции (точка с запятой не требуется).</p>
+    </li>
+    <li>
+      <p>Вложенные инструкции объединяются в блоки по величине отступов. Отступ может быть любым, главное, чтобы в
+        пределах одного вложенного блока отступ был одинаков. И про читаемость кода не забывайте. Отступ в 1 пробел, к
+        примеру, не лучшее решение. Используйте 4 пробела (или знак табуляции, на худой конец).</p>
+    </li>
+    <li>
+      <p>Вложенные инструкции в Python записываются в соответствии с одним и тем же шаблоном, когда основная
+        инструкция завершается двоеточием, вслед за которым располагается вложенный блок кода, обычно с отступом под
+        строкой основной инструкции.</p>
+      <pre class="code python3"><span class="n">Основная</span> <span class="n">инструкция</span><span class="p">:</span>
+    <span class="n">Вложенный</span> <span class="n">блок</span> <span class="n">инструкций</span></pre>
+    </li>
+  </ul>
+</div>
+<div class="section" id="section-2">
+  <h2>Несколько специальных случаев</h2>
+  <ul>
+    <li>
+      <p>Иногда возможно записать несколько инструкций в одной строке, разделяя их точкой с запятой:</p>
+      <pre
+        class="code python3"><span class="n">a</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="n">b</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span> <span class="nb">print</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span></pre>
+      <p>Но не делайте это слишком часто! Помните об удобочитаемости. А лучше вообще так не делайте.</p>
+    </li>
+    <li>
+      <p>Допустимо записывать одну инструкцию в нескольких строках. Достаточно ее заключить в пару круглых, квадратных
+        или фигурных скобок:</p>
+      <pre
+        class="code python3"><span class="k">if</span> <span class="p">(</span><span class="n">a</span> <span class="o">==</span> <span class="mi">1</span> <span class="ow">and</span> <span class="n">b</span> <span class="o">==</span> <span class="mi">2</span> <span class="ow">and</span>
+    <span class="n">c</span> <span class="o">==</span> <span class="mi">3</span> <span class="ow">and</span> <span class="n">d</span> <span class="o">==</span> <span class="mi">4</span><span class="p">):</span>  <span class="c1"># Не забываем про двоеточие</span>
+      <span class="nb">print</span><span class="p">(</span><span class="s1">'spam'</span> <span class="o">*</span> <span class="mi">3</span><span class="p">)</span></pre>
+    </li>
+    <li>
+      <p>Тело составной инструкции может располагаться в той же строке, что и тело основной, если тело составной
+        инструкции не содержит составных инструкций. Ну я думаю, вы поняли :). Давайте лучше пример приведу:</p>
+      <pre
+        class="code python3"><span class="k">if</span> <span class="n">x</span> <span class="o">&gt;</span> <span class="n">y</span><span class="p">:</span> <span class="nb">print</span><span class="p">(</span><span class="n">x</span><span class="p">)</span></pre>
+    </li>
+  </ul>
+</div>
+{% endblock %}

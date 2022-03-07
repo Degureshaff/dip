@@ -1,0 +1,137 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %} Анонимные функции в Python {% endblock %}
+
+{% block content %}
+<p>В этой статье я планирую рассказать о функциях, именных и анонимных, инструкциях def, return и lambda,
+    обязательных и необязательных аргументах функции, функциях с произвольным числом аргументов.</p>
+<div class="section" id="def">
+    <h2>Именные функции, инструкция def</h2>
+    <p>Функция в python - объект, принимающий аргументы и возвращающий значение. Обычно функция определяется с
+        помощью инструкции <b>def</b>.</p>
+    <p>Определим простейшую функцию:</p>
+    <pre class="code python3"><span class="k">def</span> <span class="nf">add</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">x</span> <span class="o">+</span> <span class="n">y</span></pre>
+    <p>Инструкция <b>return</b> говорит, что нужно вернуть значение. В нашем случае функция возвращает сумму x и y.
+    </p>
+    <p>Теперь мы ее можем вызвать:</p>
+    <div class="highlight-python3" style="position: relative;">
+        <div class="highlight"><span class="copybutton" title="Убрать приглашения и вывод программы">&gt;&gt;&gt;</span>
+            <pre class="code pycon literal-block"><span class="gp">&gt;&gt;&gt; </span><span class="n">add</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
+<span class="go">11
+</span><span class="gp">&gt;&gt;&gt; </span><span class="n">add</span><span class="p">(</span><span class="s1">'abc'</span><span class="p">,</span> <span class="s1">'def'</span><span class="p">)</span>
+<span class="go">'abcdef'</span></pre>
+        </div>
+    </div>
+    <p>Функция может быть любой сложности и возвращать любые объекты (списки, кортежи, и даже функции!):</p>
+    <div class="highlight-python3" style="position: relative;">
+        <div class="highlight"><span class="copybutton" title="Убрать приглашения и вывод программы">&gt;&gt;&gt;</span>
+            <pre class="code pycon literal-block"><span class="gp">&gt;&gt;&gt; </span><span class="k">def</span> <span class="nf">newfunc</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+<span class="gp">... </span>    <span class="k">def</span> <span class="nf">myfunc</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+<span class="gp">... </span>        <span class="k">return</span> <span class="n">x</span> <span class="o">+</span> <span class="n">n</span>
+<span class="gp">... </span>    <span class="k">return</span> <span class="n">myfunc</span>
+<span class="gp">...</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">new</span> <span class="o">=</span> <span class="n">newfunc</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span>  <span class="c1"># new - это функция</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">new</span><span class="p">(</span><span class="mi">200</span><span class="p">)</span>
+<span class="go">300</span></pre>
+        </div>
+    </div>
+    <p>Функция может и не заканчиваться инструкцией return, при этом функция вернет значение None:</p>
+    <div class="highlight-python3" style="position: relative;">
+        <div class="highlight"><span class="copybutton" title="Убрать приглашения и вывод программы">&gt;&gt;&gt;</span>
+            <pre class="code pycon literal-block"><span class="gp">&gt;&gt;&gt; </span><span class="k">def</span> <span class="nf">func</span><span class="p">():</span>
+<span class="gp">... </span>    <span class="k">pass</span>
+<span class="gp">...</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">func</span><span class="p">())</span>
+<span class="go">None</span></pre>
+        </div>
+    </div>
+</div>
+<div class="section" id="section-2">
+    <h2>Аргументы функции</h2>
+    <p>Функция может принимать произвольное количество аргументов или не принимать их вовсе. Также распространены
+        функции с произвольным числом аргументов, функции с позиционными и именованными аргументами, обязательными и
+        необязательными.</p>
+    <div class="highlight-python3" style="position: relative;">
+        <div class="highlight"><span class="copybutton" title="Убрать приглашения и вывод программы">&gt;&gt;&gt;</span>
+            <pre class="code pycon literal-block"><span class="gp">&gt;&gt;&gt; </span><span class="k">def</span> <span class="nf">func</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="mi">2</span><span class="p">):</span> <span class="c1"># c - необязательный аргумент</span>
+<span class="gp">... </span>    <span class="k">return</span> <span class="n">a</span> <span class="o">+</span> <span class="n">b</span> <span class="o">+</span> <span class="n">c</span>
+<span class="gp">...</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">func</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>  <span class="c1"># a = 1, b = 2, c = 2 (по умолчанию)</span>
+<span class="go">5
+</span><span class="gp">&gt;&gt;&gt; </span><span class="n">func</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>  <span class="c1"># a = 1, b = 2, c = 3</span>
+<span class="go">6
+</span><span class="gp">&gt;&gt;&gt; </span><span class="n">func</span><span class="p">(</span><span class="n">a</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">b</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>  <span class="c1"># a = 1, b = 3, c = 2</span>
+<span class="go">6
+</span><span class="gp">&gt;&gt;&gt; </span><span class="n">func</span><span class="p">(</span><span class="n">a</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="mi">6</span><span class="p">)</span>  <span class="c1"># a = 3, c = 6, b не определен</span>
+<span class="gt">Traceback (most recent call last):
+</span><span class="gr">  File "", line 1, in
+    func(a=3, c=6)
+TypeError</span><span>: </span><span class="n">func() takes at least 2 arguments (2 given)</span></pre>
+        </div>
+    </div>
+    <p>Функция также может принимать переменное количество позиционных аргументов, тогда перед именем ставится *:
+    </p>
+    <div class="highlight-python3" style="position: relative;">
+        <div class="highlight"><span class="copybutton" title="Убрать приглашения и вывод программы">&gt;&gt;&gt;</span>
+            <pre class="code pycon literal-block"><span class="gp">&gt;&gt;&gt; </span><span class="k">def</span> <span class="nf">func</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">):</span>
+<span class="gp">... </span>    <span class="k">return</span> <span class="n">args</span>
+<span class="gp">...</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">func</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="s1">'abc'</span><span class="p">)</span>
+<span class="go">(1, 2, 3, 'abc')
+</span><span class="gp">&gt;&gt;&gt; </span><span class="n">func</span><span class="p">()</span>
+<span class="go">()
+</span><span class="gp">&gt;&gt;&gt; </span><span class="n">func</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="go">(1,)</span></pre>
+        </div>
+    </div>
+    <p>Как видно из примера, args - это <a href="{% url 'eleventh' %}" target="_blank">кортеж</a> из всех переданных
+        аргументов функции, и с переменной можно работать также,
+        как и с кортежем.</p>
+    <p>Функция может принимать и произвольное число именованных аргументов, тогда перед именем ставится **:</p>
+    <div class="highlight-python3" style="position: relative;">
+        <div class="highlight"><span class="copybutton" title="Убрать приглашения и вывод программы">&gt;&gt;&gt;</span>
+            <pre class="code pycon literal-block"><span class="gp">&gt;&gt;&gt; </span><span class="k">def</span> <span class="nf">func</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<span class="gp">... </span>    <span class="k">return</span> <span class="n">kwargs</span>
+<span class="gp">...</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">func</span><span class="p">(</span><span class="n">a</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">b</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+<span class="go">{'a': 1, 'c': 3, 'b': 2}
+</span><span class="gp">&gt;&gt;&gt; </span><span class="n">func</span><span class="p">()</span>
+<span class="go">{}
+</span><span class="gp">&gt;&gt;&gt; </span><span class="n">func</span><span class="p">(</span><span class="n">a</span><span class="o">=</span><span class="s1">'python'</span><span class="p">)</span>
+<span class="go">{'a': 'python'}</span></pre>
+        </div>
+    </div>
+    <p>В переменной kwargs у нас хранится <a href="{% url 'twelveth' %}" target="_blank">словарь</a>, с которым мы,
+        опять-таки, можем делать все, что нам заблагорассудится.</p>
+</div>
+<div class="section" id="lambda">
+    <h2>Анонимные функции, инструкция lambda</h2>
+    <p>Анонимные функции могут содержать лишь одно выражение, но и выполняются они быстрее. Анонимные функции
+        создаются с помощью инструкции <b>lambda</b>. Кроме этого, их не обязательно присваивать переменной, как
+        делали мы инструкцией def func():</p>
+    <div class="highlight-python3" style="position: relative;">
+        <div class="highlight"><span class="copybutton" title="Убрать приглашения и вывод программы">&gt;&gt;&gt;</span>
+            <pre class="code pycon literal-block"><span class="gp">&gt;&gt;&gt; </span><span class="n">func</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">:</span> <span class="n">x</span> <span class="o">+</span> <span class="n">y</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">func</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+<span class="go">3
+</span><span class="gp">&gt;&gt;&gt; </span><span class="n">func</span><span class="p">(</span><span class="s1">'a'</span><span class="p">,</span> <span class="s1">'b'</span><span class="p">)</span>
+<span class="go">'ab'
+</span><span class="gp">&gt;&gt;&gt; </span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">:</span> <span class="n">x</span> <span class="o">+</span> <span class="n">y</span><span class="p">)(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+<span class="go">3
+</span><span class="gp">&gt;&gt;&gt; </span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">:</span> <span class="n">x</span> <span class="o">+</span> <span class="n">y</span><span class="p">)(</span><span class="s1">'a'</span><span class="p">,</span> <span class="s1">'b'</span><span class="p">)</span>
+<span class="go">'ab'</span></pre>
+        </div>
+    </div>
+    <p>lambda функции, в отличие от обычной, не требуется инструкция return, а в остальном, ведет себя точно так же:
+    </p>
+    <div class="highlight-python3" style="position: relative;">
+        <div class="highlight"><span class="copybutton" title="Убрать приглашения и вывод программы">&gt;&gt;&gt;</span>
+            <pre class="code pycon literal-block"><span class="gp">&gt;&gt;&gt; </span><span class="n">func</span> <span class="o">=</span> <span class="k">lambda</span> <span class="o">*</span><span class="n">args</span><span class="p">:</span> <span class="n">args</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">func</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
+<span class="go">(1, 2, 3, 4)</span></pre>
+        </div>
+    </div>
+</div>
+{% endblock %}

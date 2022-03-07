@@ -1,0 +1,105 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="{% static 'scss/style.css' %}">
+  <title>{% block title %} {% endblock %}</title>
+</head>
+
+<body>
+  <header>
+    <div class="container">
+      <div class="header__inner">
+        <a class="header__title" href="{% url 'main' %}">
+          <img src="{% static './images/python.png' %}">
+          <p>LearnPy</p>
+        </a>
+        <ul class="header__links">
+          <a href="{% url 'main' %}">
+            <li>Главная</li>
+          </a>
+          <a href="{% url 'main' %}#books">
+            <li>Документы</li>
+          </a>
+        </ul>
+      </div>
+    </div>
+  </header>
+
+  
+  <div class="content">
+    <nav>
+      <div class='container'>
+        <div class='rowww'>
+          <a href="{% url 'first' %}">
+            1. Установка Python
+          </a>
+          <a href="{% url 'second' %}">
+            2. Первая Программа на Idle
+          </a>
+          <a href="{% url 'third' %}">
+            3. Синтаксис Языка Python 
+          </a>
+          <a href="{% url 'fourth' %}">
+            4. Условные операторы if-elif-else 
+          </a>
+          <a href="{% url 'fifth' %}">
+            5. Циклы For, While 
+          </a>
+        </div>
+        <div class='rowww'>
+        <a href="{% url 'sixth' %}">
+          6. Ключевые слова в Python 
+        </a>
+        <a href="{% url 'seventh' %}">
+          7. Функции в Python 
+        </a>
+        <a href="{% url 'eighth' %}">
+          8. Числа в Python 
+        </a>
+        <a href="{% url 'nineth' %}">
+          9. Списки в Python 
+        </a>
+        <a href="{% url 'tenth' %}">
+          10. Операция взятии Индекса и Срез 
+        </a>
+        </div>
+        <div class='rowww'>
+        <a href="{% url 'eleventh' %}">
+          11. Кортежи в Python 
+        </a>
+        <a href="{% url 'twelveth' %}">
+          12. Словари в Python 
+        </a>
+        <a href="{% url 'thirteenth' %}">
+          13. Множества в Python 
+        </a>
+        <a href="{% url 'fourteenth' %}">
+          14. Анонимные Функции в Python 
+        </a>
+        <a href="{% url 'fifteenth' %}">
+          15. Встроенные средства для работы с файлами
+        </a>
+        </div>
+      </div>
+    </nav>
+    <div class="container">
+      {% block content %} {% endblock %}
+    </div>
+  </div>
+
+  <footer>
+    <div class="container">
+      <div class="footer__copyright">
+        <p>2021-2022 Emir &copy;</p>
+      </div>
+    </div>
+  </footer>
+</body>
+
+</html>

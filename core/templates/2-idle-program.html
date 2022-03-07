@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %} Первая Программа в Idle {% endblock %}
+
+{% block content %}
+<div class="section">
+  <p>Сегодня мы напишем свою первую программу в среде разработки IDLE.</p>
+  <p>После <a href="{% url 'first' %}" target="_blank">загрузки и установки python</a>
+    открываем IDLE (среда разработки на языке Python, поставляемая вместе с дистрибутивом).</p>
+  <p>Здесь и далее буду приводить примеры под ОС Windows, так как именно она у меня сейчас под рукой.</p>
+  <p><img alt="Запуск IDLE из меню Пуск" src="{% static './images/2/start-idle.png' %}"></p>
+  <p>Запускаем IDLE (изначально запускается в интерактивном режиме), после чего уже можно начинать писать первую
+    программу. Традиционно, первой программой у нас будет "hello world".</p>
+  <p>Чтобы написать "hello world" на python, достаточно всего одной строки:</p>
+  <pre
+    class="code python3"><span class="nb">print</span><span class="p">(</span><span class="s2">"Hello world!"</span><span class="p">)</span></pre>
+  <p>Вводим этот код в IDLE и нажимаем Enter. Результат виден на картинке:</p>
+  <p><img alt="Первая программа на python" src="{% static './images/2/idle-first-programm.png' %}"></p>
+  <p>Поздравляю! Вы написали свою <b>первую программу на python</b>!</p>
+  <p>С интерактивным режимом мы немного познакомились, можете с ним ещё поиграться, например, написать</p>
+  <pre
+    class="code python3"><span class="nb">print</span><span class="p">(</span><span class="mi">3</span> <span class="o">+</span> <span class="mi">4</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="mi">3</span> <span class="o">*</span> <span class="mi">5</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="mi">3</span> <span class="o">**</span> <span class="mi">2</span><span class="p">)</span></pre>
+  <p>Но, всё-таки, интерактивный режим не будет являться основным. В основном, вы будете сохранять программный код в
+    файл и запускать уже файл.</p>
+  <p>Для того, чтобы создать новое окно, в интерактивном режиме IDLE выберите File → New File (или нажмите Ctrl + N).
+  </p>
+  <p><img alt="Открытие нового окна в IDLE" src="{% static './images/2/idle-new-window.png' %}"></p>
+  <p>В открывшемся окне введите следующий код:</p>
+  <pre
+    class="code python3"><span class="n">name</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s2">"Как Вас зовут? "</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Привет,"</span><span class="p">,</span> <span class="n">name</span><span class="p">)</span></pre>
+  <p>Первая строка печатает вопрос ("Как Вас зовут? "), ожидает, пока вы не напечатаете что-нибудь и не нажмёте Enter и
+    сохраняет введённое значение в переменной name.</p>
+  <p>Во второй строке мы используем функцию print для вывода текста на экран, в данном случае для вывода "Привет, " и
+    того, что хранится в переменной "name".</p>
+  <p>Теперь нажмём F5 (или выберем в меню IDLE Run → Run Module) и убедимся, что то, что мы написали, работает. Перед
+    запуском IDLE предложит нам сохранить файл. Сохраним туда, куда вам будет удобно, после чего программа запустится.
+  </p>
+  <p>Вы должны увидеть что-то наподобие этого (на скриншоте слева - файл с написанной вами программой, справа -
+    результат её работы):</p>
+  <p><img alt="Запуск программы в IDLE" src="{% static './images/2/idle-run-script.png' %}"></p>
+  <p>Поздравляю! Вы научились писать простейшие программы, а также познакомились со средой разработки IDLE. Теперь можно
+    немного отдохнуть, а потом начать изучать python дальше. Можете посмотреть <a
+      href="{% url 'third' %}" target="_blank">синтаксис python</a>, <a
+      href="{% url 'fifth' %}"
+      target="_blank">циклы</a> или <a
+      href="{% url 'fourth' %}"
+      target="_blank">условия</a>. Желаю удачи!</p>
+</div>
+{% endblock %}

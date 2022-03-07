@@ -1,0 +1,146 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %} Встроенные средства для работы с файлами в Python {% endblock %}
+
+{% block content %}
+<p>В данной статье мы рассмотрим встроенные средства python для работы с файлами: открытие / закрытие, чтение и
+  запись.</p>
+<p>Итак, начнем. Прежде, чем работать с файлом, его надо открыть. С этим замечательно справится встроенная функция
+  open:</p>
+<pre
+  class="code python3"><span class="n">f</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s1">'text.txt'</span><span class="p">,</span> <span class="s1">'r'</span><span class="p">)</span></pre>
+<p>У функции open много параметров, они указаны в статье "<a
+    href="{% url 'seventh' %}" target="_blank">Встроенные функции</a>", нам пока
+  важны 3 аргумента: первый, это имя файла. Путь к файлу может быть относительным или абсолютным. Второй аргумент, это
+  режим, в котором мы будем открывать файл.</p>
+<div class="table-wrapper">
+  <table border="1" class="docutils">
+    <tbody valign="top">
+      <tr>
+        <td>Режим</td>
+        <td>Обозначение</td>
+      </tr>
+      <tr>
+        <td>'r'</td>
+        <td>открытие на чтение (является значением по умолчанию).</td>
+      </tr>
+      <tr>
+        <td>'w'</td>
+        <td>открытие на запись, содержимое файла удаляется, если файла не существует, создается новый.</td>
+      </tr>
+      <tr>
+        <td>'x'</td>
+        <td>открытие на запись, если файла не существует, иначе исключение.</td>
+      </tr>
+      <tr>
+        <td>'a'</td>
+        <td>открытие на дозапись, информация добавляется в конец файла.</td>
+      </tr>
+      <tr>
+        <td>'b'</td>
+        <td>открытие в двоичном режиме.</td>
+      </tr>
+      <tr>
+        <td>'t'</td>
+        <td>открытие в текстовом режиме (является значением по умолчанию).</td>
+      </tr>
+      <tr>
+        <td>'+'</td>
+        <td>открытие на чтение и запись</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+<p>Режимы могут быть объединены, то есть, к примеру, 'rb' - чтение в двоичном режиме. По умолчанию режим равен 'rt'.
+</p>
+<p>И последний аргумент, encoding, нужен только в текстовом режиме чтения файла. Этот аргумент задает кодировку.</p>
+<div class="section" id="section-2">
+  <h2>Чтение из файла</h2>
+  <p>Открыли мы файл, а теперь мы хотим прочитать из него информацию. Для этого есть несколько способов, но большого
+    интереса заслуживают лишь два из них.</p>
+  <p>Первый - метод read, читающий весь файл целиком, если был вызван без аргументов, и n символов, если был вызван с
+    аргументом (целым числом n).</p>
+  <div class="highlight-python3" style="position: relative;">
+    <div class="highlight"><span class="copybutton" title="Убрать приглашения и вывод программы">&gt;&gt;&gt;</span>
+      <pre class="code pycon literal-block"><span class="gp">&gt;&gt;&gt; </span><span class="n">f</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s1">'text.txt'</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="go">'H'
+</span><span class="gp">&gt;&gt;&gt; </span><span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+<span class="go">'ello world!\nThe end.\n\n'</span></pre>
+    </div>
+  </div>
+  <p>Ещё один способ сделать это - прочитать файл построчно, воспользовавшись <a
+      href="{% url 'fifth' %}"
+      target="_blank">циклом for</a>:</p>
+  <div class="highlight-python3" style="position: relative;">
+    <div class="highlight"><span class="copybutton" title="Убрать приглашения и вывод программы">&gt;&gt;&gt;</span>
+      <pre class="code pycon literal-block"><span class="gp">&gt;&gt;&gt; </span><span class="n">f</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s1">'text.txt'</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">f</span><span class="p">:</span>
+<span class="gp">... </span>    <span class="n">line</span>
+<span class="gp">...</span>
+<span class="go">'Hello world!\n'
+'\n'
+'The end.\n'
+'\n'</span></pre>
+    </div>
+  </div>
+</div>
+<div class="section" id="section-3">
+  <h2>Запись в файл</h2>
+  <p>Теперь рассмотрим запись в файл. Попробуем записать в файл вот такой вот список:</p>
+  <div class="highlight-python3" style="position: relative;">
+    <div class="highlight"><span class="copybutton" title="Убрать приглашения и вывод программы">&gt;&gt;&gt;</span>
+      <pre
+        class="code pycon literal-block"><span class="gp">&gt;&gt;&gt; </span><span class="n">l</span> <span class="o">=</span> <span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">)</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">20</span><span class="p">)]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">l</span>
+<span class="go">['0-1', '10', '21', '32', '43', '54', '65', '76', '87', '98', '109', '1110', '1211', '1312', '1413', '1514', '1615', '1716', '1817', '1918']</span></pre>
+    </div>
+  </div>
+  <p>Откроем файл на запись:</p>
+  <div class="highlight-python3" style="position: relative;">
+    <div class="highlight"><span class="copybutton" title="Убрать приглашения и вывод программы">&gt;&gt;&gt;</span>
+      <pre
+        class="code pycon literal-block"><span class="gp">&gt;&gt;&gt; </span><span class="n">f</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s1">'text.txt'</span><span class="p">,</span> <span class="s1">'w'</span><span class="p">)</span></pre>
+    </div>
+  </div>
+  <p>Запись в файл осуществляется с помощью метода write:</p>
+  <div class="highlight-python3" style="position: relative;">
+    <div class="highlight"><span class="copybutton" title="Убрать приглашения и вывод программы">&gt;&gt;&gt;</span>
+      <pre class="code pycon literal-block"><span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">index</span> <span class="ow">in</span> <span class="n">l</span><span class="p">:</span>
+<span class="gp">... </span>    <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">index</span> <span class="o">+</span> <span class="s1">'</span><span class="se">\n</span><span class="s1">'</span><span class="p">)</span>
+<span class="gp">...</span>
+<span class="go">4
+3
+3
+3
+3</span></pre>
+    </div>
+  </div>
+  <p>Для тех, кто не понял, что это за цифры, поясню: метод write возвращает число записанных символов.</p>
+  <p>После окончания работы с файлом его <b>обязательно нужно закрыть</b> с помощью метода close:</p>
+  <div class="highlight-python3" style="position: relative;">
+    <div class="highlight"><span class="copybutton" title="Убрать приглашения и вывод программы">&gt;&gt;&gt;</span>
+      <pre
+        class="code pycon literal-block"><span class="gp">&gt;&gt;&gt; </span><span class="n">f</span><span class="o">.</span><span class="n">close</span><span class="p">()</span></pre>
+    </div>
+  </div>
+  <p>Теперь попробуем воссоздать этот список из получившегося файла. Откроем файл на чтение (надеюсь, вы поняли, как
+    это сделать?), и прочитаем строки.</p>
+  <div class="highlight-python3" style="position: relative;">
+    <div class="highlight"><span class="copybutton" title="Убрать приглашения и вывод программы">&gt;&gt;&gt;</span>
+      <pre
+        class="code pycon literal-block"><span class="gp">&gt;&gt;&gt; </span><span class="n">f</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s1">'text.txt'</span><span class="p">,</span> <span class="s1">'r'</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">l</span> <span class="o">=</span> <span class="p">[</span><span class="n">line</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span> <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">f</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">l</span>
+<span class="go">['0-1', '10', '21', '32', '43', '54', '65', '76', '87', '98', '109', '1110', '1211', '1312', '1413', '1514', '1615', '1716', '1817', '1918']
+</span><span class="gp">&gt;&gt;&gt; </span><span class="n">f</span><span class="o">.</span><span class="n">close</span><span class="p">()</span></pre>
+    </div>
+  </div>
+  <p>Мы получили тот же список, что и был. В более сложных случаях (словарях, вложенных кортежей и т. д.) алгоритм
+    записи придумать сложнее. Но это и не нужно. В python уже давно придумали средства, такие как <a
+      href="{% url '404' %}" target="_blank">pickle</a> или <a
+      href="{% url '404' %}" target="_blank">json</a>, позволяющие сохранять в файле
+    сложные структуры.</p>
+</div>
+{% endblock %}

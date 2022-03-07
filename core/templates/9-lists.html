@@ -1,0 +1,162 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %} Списки в Python {% endblock %}
+
+{% block content %}
+<p>Сегодня я расскажу о таком типе данных, как <b>списки</b>, операциях над ними и методах, о генераторах списков и о
+  применении списков.</p>
+<div class="section" id="section-1">
+  <h2>Что такое списки?</h2>
+  <p>Списки в Python - упорядоченные изменяемые коллекции объектов произвольных типов (почти как массив, но типы могут
+    отличаться).</p>
+  <p>Чтобы использовать списки, их нужно создать. Создать список можно несколькими способами. Например, можно
+    обработать любой итерируемый объект (например, <a
+      href="{% url '404' %}" target="_blank">строку</a>)
+    встроенной функцией <b>list</b>:</p>
+  <div class="highlight-python3" style="position: relative;">
+    <div class="highlight"><span class="copybutton" title="Убрать приглашения и вывод программы">&gt;&gt;&gt;</span>
+      <pre class="code pycon literal-block"><span class="gp">&gt;&gt;&gt; </span><span class="nb">list</span><span class="p">(</span><span class="s1">'список'</span><span class="p">)</span>
+<span class="go">['с', 'п', 'и', 'с', 'о', 'к']</span></pre>
+    </div>
+  </div>
+  <p>Список можно создать и при помощи литерала:</p>
+  <div class="highlight-python3" style="position: relative;">
+    <div class="highlight"><span class="copybutton" title="Убрать приглашения и вывод программы">&gt;&gt;&gt;</span>
+      <pre class="code pycon literal-block"><span class="gp">&gt;&gt;&gt; </span><span class="n">s</span> <span class="o">=</span> <span class="p">[]</span>  <span class="c1"># Пустой список</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">l</span> <span class="o">=</span> <span class="p">[</span><span class="s1">'s'</span><span class="p">,</span> <span class="s1">'p'</span><span class="p">,</span> <span class="p">[</span><span class="s1">'isok'</span><span class="p">],</span> <span class="mi">2</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">s</span>
+<span class="go">[]
+</span><span class="gp">&gt;&gt;&gt; </span><span class="n">l</span>
+<span class="go">['s', 'p', ['isok'], 2]</span></pre>
+    </div>
+  </div>
+  <p>Как видно из примера, список может содержать любое количество любых объектов (в том числе и вложенные списки),
+    или не содержать ничего.</p>
+  <p>И еще один способ создать список - это <b>генераторы списков</b>. Генератор списков - способ построить новый
+    список, применяя выражение к каждому элементу последовательности. Генераторы списков очень похожи на цикл <a
+      href="{% url 'fifth' %}"
+      target="_blank">for</a>.</p>
+  <div class="highlight-python3" style="position: relative;">
+    <div class="highlight"><span class="copybutton" title="Убрать приглашения и вывод программы">&gt;&gt;&gt;</span>
+      <pre class="code pycon literal-block"><span class="gp">&gt;&gt;&gt; </span><span class="n">c</span> <span class="o">=</span> <span class="p">[</span><span class="n">c</span> <span class="o">*</span> <span class="mi">3</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="s1">'list'</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">c</span>
+<span class="go">['lll', 'iii', 'sss', 'ttt']</span></pre>
+    </div>
+  </div>
+  <p>Возможна и более сложная конструкция генератора списков:</p>
+  <div class="highlight-python3" style="position: relative;">
+    <div class="highlight"><span class="copybutton" title="Убрать приглашения и вывод программы">&gt;&gt;&gt;</span>
+      <pre class="code pycon literal-block"><span class="gp">&gt;&gt;&gt; </span><span class="n">c</span> <span class="o">=</span> <span class="p">[</span><span class="n">c</span> <span class="o">*</span> <span class="mi">3</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="s1">'list'</span> <span class="k">if</span> <span class="n">c</span> <span class="o">!=</span> <span class="s1">'i'</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">c</span>
+<span class="go">['lll', 'sss', 'ttt']
+</span><span class="gp">&gt;&gt;&gt; </span><span class="n">c</span> <span class="o">=</span> <span class="p">[</span><span class="n">c</span> <span class="o">+</span> <span class="n">d</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="s1">'list'</span> <span class="k">if</span> <span class="n">c</span> <span class="o">!=</span> <span class="s1">'i'</span> <span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="s1">'spam'</span> <span class="k">if</span> <span class="n">d</span> <span class="o">!=</span> <span class="s1">'a'</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">c</span>
+<span class="go">['ls', 'lp', 'lm', 'ss', 'sp', 'sm', 'ts', 'tp', 'tm']</span></pre>
+    </div>
+  </div>
+  <p>Но в сложных случаях лучше пользоваться обычным циклом for для генерации списков.</p>
+</div>
+<div class="section" id="section-2">
+  <h2>Функции и методы списков</h2>
+  <p>Создать создали, теперь нужно со списком что-то делать. Для списков доступны основные <a
+      href="{% url 'seventh' %}" target="_blank">встроенные функции</a>, а также
+    методы списков.</p>
+</div>
+<div class="section" id="section-3">
+  <h2>Таблица "методы списков"</h2>
+  <div class="table-wrapper">
+    <table border="1" class="docutils">
+      <thead valign="bottom">
+        <tr>
+          <th class="head">Метод</th>
+          <th class="head">Что делает</th>
+        </tr>
+      </thead>
+      <tbody valign="top">
+        <tr>
+          <td><b>list.append</b>(x)</td>
+          <td>Добавляет элемент в конец списка</td>
+        </tr>
+        <tr>
+          <td><b>list.extend</b>(L)</td>
+          <td>Расширяет список list, добавляя в конец все элементы списка L</td>
+        </tr>
+        <tr>
+          <td><b>list.insert</b>(i, x)</td>
+          <td>Вставляет на i-ый элемент значение x</td>
+        </tr>
+        <tr>
+          <td><b>list.remove</b>(x)</td>
+          <td>Удаляет первый элемент в списке, имеющий значение x. ValueError, если такого элемента не существует</td>
+        </tr>
+        <tr>
+          <td><b>list.pop</b>([i])</td>
+          <td>Удаляет i-ый элемент и возвращает его. Если индекс не указан, удаляется последний элемент</td>
+        </tr>
+        <tr>
+          <td><b>list.index</b>(x, [start [, end]])</td>
+          <td>Возвращает положение первого элемента со значением x (при этом поиск ведется от start до end)</td>
+        </tr>
+        <tr>
+          <td><b>list.count</b>(x)</td>
+          <td>Возвращает количество элементов со значением x</td>
+        </tr>
+        <tr>
+          <td><b>list.sort</b>([key=функция])</td>
+          <td>Сортирует список на основе функции</td>
+        </tr>
+        <tr>
+          <td><b>list.reverse</b>()</td>
+          <td>Разворачивает список</td>
+        </tr>
+        <tr>
+          <td><b>list.copy</b>()</td>
+          <td>Поверхностная копия списка</td>
+        </tr>
+        <tr>
+          <td><b>list.clear</b>()</td>
+          <td>Очищает список</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <p>Нужно отметить, что методы списков, в отличие от <a
+      href="{% url '404' %}" target="_blank">строковых
+      методов</a>, изменяют сам список, а потому результат выполнения не нужно записывать в эту переменную.</p>
+  <div class="highlight-python3" style="position: relative;">
+    <div class="highlight"><span class="copybutton" title="Убрать приглашения и вывод программы">&gt;&gt;&gt;</span>
+      <pre class="code pycon literal-block"><span class="gp">&gt;&gt;&gt; </span><span class="n">l</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">7</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">l</span><span class="o">.</span><span class="n">sort</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">l</span>
+<span class="go">[1, 2, 3, 5, 7]
+</span><span class="gp">&gt;&gt;&gt; </span><span class="n">l</span> <span class="o">=</span> <span class="n">l</span><span class="o">.</span><span class="n">sort</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">l</span><span class="p">)</span>
+<span class="go">None</span></pre>
+    </div>
+  </div>
+  <p>И, напоследок, примеры работы со списками:</p>
+  <div class="highlight-python3" style="position: relative;">
+    <div class="highlight"><span class="copybutton" title="Убрать приглашения и вывод программы">&gt;&gt;&gt;</span>
+      <pre class="code pycon literal-block"><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="p">[</span><span class="mf">66.25</span><span class="p">,</span> <span class="mi">333</span><span class="p">,</span> <span class="mi">333</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mf">1234.5</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">a</span><span class="o">.</span><span class="n">count</span><span class="p">(</span><span class="mi">333</span><span class="p">),</span> <span class="n">a</span><span class="o">.</span><span class="n">count</span><span class="p">(</span><span class="mf">66.25</span><span class="p">),</span> <span class="n">a</span><span class="o">.</span><span class="n">count</span><span class="p">(</span><span class="s1">'x'</span><span class="p">))</span>
+<span class="go">2 1 0
+</span><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="mi">333</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span>
+<span class="go">[66.25, 333, -1, 333, 1, 1234.5, 333]
+</span><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="mi">333</span><span class="p">)</span>
+<span class="go">1
+</span><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="mi">333</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span>
+<span class="go">[66.25, -1, 333, 1, 1234.5, 333]
+</span><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span><span class="o">.</span><span class="n">reverse</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span>
+<span class="go">[333, 1234.5, 1, 333, -1, 66.25]
+</span><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span><span class="o">.</span><span class="n">sort</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span>
+<span class="go">[-1, 1, 66.25, 333, 333, 1234.5]</span></pre>
+    </div>
+  </div>
+</div>
+{% endblock %}

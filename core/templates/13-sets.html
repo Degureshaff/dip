@@ -1,0 +1,102 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %} Множества в Python {% endblock %}
+
+{% block content %}
+<p>Доброго времени суток! Сегодня я расскажу о работе с множествами в python, операциях над ними и покажу примеры их
+  применения.</p>
+<div class="section" id="section-1">
+  <h2>Что такое множество?</h2>
+  <p>Множество в python - "контейнер", содержащий не повторяющиеся элементы в случайном порядке.</p>
+  <p>Создаём множества:</p>
+  <div class="highlight-python3" style="position: relative;">
+    <div class="highlight"><span class="copybutton" title="Убрать приглашения и вывод программы">&gt;&gt;&gt;</span>
+      <pre class="code pycon literal-block"><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span>
+<span class="go">set()
+</span><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="s1">'hello'</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span>
+<span class="go">{'h', 'o', 'l', 'e'}
+</span><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="p">{</span><span class="s1">'a'</span><span class="p">,</span> <span class="s1">'b'</span><span class="p">,</span> <span class="s1">'c'</span><span class="p">,</span> <span class="s1">'d'</span><span class="p">}</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span>
+<span class="go">{'b', 'c', 'a', 'd'}
+</span><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="p">{</span><span class="n">i</span> <span class="o">**</span> <span class="mi">2</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">)}</span> <span class="c1"># генератор множеств</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span>
+<span class="go">{0, 1, 4, 81, 64, 9, 16, 49, 25, 36}
+</span><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="p">{}</span>  <span class="c1"># А так нельзя!</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">type</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+<span class="go">&lt;class 'dict'&gt;</span></pre>
+    </div>
+  </div>
+  <p>Как видно из примера, множества имеет тот же литерал, что и <a
+      href="{% url 'twelveth' %}"
+      target="_blank">словарь</a>, но пустое множество с помощью литерала создать нельзя.</p>
+  <p>Множества удобно использовать для удаления повторяющихся элементов:</p>
+  <div class="highlight-python3" style="position: relative;">
+    <div class="highlight"><span class="copybutton" title="Убрать приглашения и вывод программы">&gt;&gt;&gt;</span>
+      <pre class="code pycon literal-block"><span class="gp">&gt;&gt;&gt; </span><span class="n">words</span> <span class="o">=</span> <span class="p">[</span><span class="s1">'hello'</span><span class="p">,</span> <span class="s1">'daddy'</span><span class="p">,</span> <span class="s1">'hello'</span><span class="p">,</span> <span class="s1">'mum'</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">set</span><span class="p">(</span><span class="n">words</span><span class="p">)</span>
+<span class="go">{'hello', 'daddy', 'mum'}</span></pre>
+    </div>
+  </div>
+  <p>С множествами можно выполнять множество операций: находить объединение, пересечение...</p>
+  <ul>
+    <li>len(s) - число элементов в множестве (размер множества).</li>
+    <li>x in s - принадлежит ли x множеству s.</li>
+    <li><b>set.isdisjoint</b>(other) - истина, если set и other не имеют общих элементов.</li>
+    <li><b>set == other</b> - все элементы set принадлежат other, все элементы other принадлежат set.</li>
+    <li><b>set.issubset</b>(other) или <b>set &lt;= other</b> - все элементы set принадлежат other.</li>
+    <li><b>set.issuperset</b>(other) или <b>set &gt;= other</b> - аналогично.</li>
+    <li><b>set.union</b>(other, ...) или <b>set | other | ...</b> - объединение нескольких множеств.</li>
+    <li><b>set.intersection</b>(other, ...) или <b>set &amp; other &amp; ...</b> - пересечение.</li>
+    <li><b>set.difference</b>(other, ...) или <b>set - other - ...</b> - множество из всех элементов set, не
+      принадлежащие ни одному из other.</li>
+    <li><b>set.symmetric_difference</b>(other); <b>set ^ other</b> - множество из элементов, встречающихся в одном
+      множестве, но не встречающиеся в обоих.</li>
+    <li><b>set.copy</b>() - копия множества.</li>
+  </ul>
+  <p>И операции, непосредственно изменяющие множество:</p>
+  <ul>
+    <li><b>set.update</b>(other, ...); set |= other | ... - объединение.</li>
+    <li><b>set.intersection_update</b>(other, ...); set &amp;= other &amp; ... - пересечение.</li>
+    <li><b>set.difference_update</b>(other, ...); set -= other | ... - вычитание.</li>
+    <li><b>set.symmetric_difference_update</b>(other); set ^= other - множество из элементов, встречающихся в одном
+      множестве, но не встречающиеся в обоих.</li>
+    <li><b>set.add</b>(elem) - добавляет элемент в множество.</li>
+    <li><b>set.remove</b>(elem) - удаляет элемент из множества. KeyError, если такого элемента не существует.</li>
+    <li><b>set.discard</b>(elem) - удаляет элемент, если он находится в множестве.</li>
+    <li><b>set.pop</b>() - удаляет первый элемент из множества. Так как множества не упорядочены, нельзя точно
+      сказать, какой элемент будет первым.</li>
+    <li><b>set.clear</b>() - очистка множества.</li>
+  </ul>
+</div>
+<div class="section" id="frozenset">
+  <h2>frozenset</h2>
+  <p>Единственное отличие set от frozenset заключается в том, что set - изменяемый тип данных, а frozenset - нет.
+    Примерно похожая ситуация с <a
+      href="{% url 'nineth' %}"
+      target="_blank">списками</a> и <a href="{% url 'eleventh' %}"
+      target="_blank">кортежами</a>.</p>
+  <div class="highlight-python3" style="position: relative;">
+    <div class="highlight"><span class="copybutton" title="Убрать приглашения и вывод программы">&gt;&gt;&gt;</span>
+      <pre
+        class="code pycon literal-block"><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="s1">'qwerty'</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">b</span> <span class="o">=</span> <span class="nb">frozenset</span><span class="p">(</span><span class="s1">'qwerty'</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">==</span> <span class="n">b</span>
+<span class="go">True
+</span><span class="gp">&gt;&gt;&gt; </span><span class="kc">True</span>
+<span class="go">True
+</span><span class="gp">&gt;&gt;&gt; </span><span class="nb">type</span><span class="p">(</span><span class="n">a</span> <span class="o">-</span> <span class="n">b</span><span class="p">)</span>
+<span class="go">&lt;class 'set'&gt;
+</span><span class="gp">&gt;&gt;&gt; </span><span class="nb">type</span><span class="p">(</span><span class="n">a</span> <span class="o">|</span> <span class="n">b</span><span class="p">)</span>
+<span class="go">&lt;class 'set'&gt;
+</span><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">b</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="gt">Traceback (most recent call last):
+</span><span>  File </span><span class="nb">"&lt;stdin&gt;"</span><span>, line </span><span class="m">1</span><span>, in </span><span class="n">&lt;module&gt;</span>
+<span class="gr">AttributeError</span><span>: </span><span class="n">'frozenset' object has no attribute 'add'</span></pre>
+    </div>
+  </div>
+</div>
+{% endblock %}
